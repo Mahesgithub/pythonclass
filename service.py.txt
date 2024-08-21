@@ -1,0 +1,24 @@
+from PyPDF2 import PdfReader
+from transformers import pipeline
+
+def process_pdf(file: UploadFile):
+    if not file.filename.endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are allowed.")
+    
+    text = extract_text_from_pdf(file.file)
+    # Further processing or saving to a database can be done here
+    return {"filename": file.filename, "content": text[:500]}  # First 500 chars for brevity
+
+def extract_text_from_pdf(file):
+    reader = PdfReader(file)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text()
+    return text
+
+def chat_with_pdf(query: str):
+    # Example using a simple QA pipeline
+    qa_pipeline = pipeline("question-answering", model="distilbert-base-uncased-distilled-squad")
+    context = "Some extracted PDF text here"  # In reality, this would be more dynamic
+    answer = qa_pipeline(question=query, context=context)
+    return {"answer": answer['answer']}

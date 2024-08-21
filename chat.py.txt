@@ -1,0 +1,12 @@
+from fastapi import APIRouter, File, UploadFile, HTTPException
+from app.services import process_pdf, chat_with_pdf
+
+router = APIRouter()
+
+@router.post("/upload-pdf/")
+async def upload_pdf(file: UploadFile = File(...)):
+    return process_pdf(file)
+
+@router.post("/chat/")
+async def chat(query: str):
+    return chat_with_pdf(query)

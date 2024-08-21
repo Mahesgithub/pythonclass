@@ -1,0 +1,16 @@
+# PDF Chatbot
+
+This project is a conversational PDF chatbot built with FastAPI and OpenAI or open-source LLM APIs.
+
+## Features
+
+- Upload PDF files
+- Chat with the content of the PDF using Retrieval-Augmented Generation (RAG)
+- Integration with OpenAI / Hugging Face models
+
+## Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/pdf_chatbot.git
+   cd pdf_chatbot

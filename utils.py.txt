@@ -1,0 +1,13 @@
+import os
+from pathlib import Path
+
+def save_file(file, directory="uploads"):
+    upload_dir = Path(directory)
+    upload_dir.mkdir(parents=True, exist_ok=True)
+    file_path = upload_dir / file.filename
+    with open(file_path, "wb") as f:
+        f.write(file.file.read())
+    return file_path
+
+def file_exists(file_path):
+    return Path(file_path).exists()
